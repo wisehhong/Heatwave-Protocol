@@ -401,13 +401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: 
+  MissionName: Boat
+  MissionDescription: Whaling boats, although illegal in most countries, are still
+    at large in the world today. They indirecctly contribute to marine heatwaves
+    by killing whales, which contribute to removing over 40 percent of all CO2 and
+    facilitate the movement of cold water to warm zones. How do whaling boats cause
+    marine heatwaves?
+  CorrectAnswer: Overfishing of Whales
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Removal of Predators
+  - Boat Exhaust
+  - Moving through Climates
   MissionPoints: 0
 --- !u!1 &160039952
 GameObject:
@@ -692,13 +696,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: Correct Answer
+  MissionName: Cachalot
+  MissionDescription: Cachalot whales are the deepest diving of all whales. Through
+    their cycle of alternating between the surface and the deep sea to eat and breathe
+    (the whale pump), they move colder water from the depths to the surface, cooling
+    down surface temperature. How do cachalots prevent heatwaves?
+  CorrectAnswer: Whale Pump
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Whale Conveyer Belt
+  - Eating Large Animals
+  - Feeding on Zooplankton
   MissionPoints: 0
 --- !u!1 &191551310
 GameObject:
@@ -848,12 +855,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissionName: Power Plant
-  MissionDescription: This is Power Plant
-  CorrectAnswer: Correct Answer
+  MissionDescription: Power Plants contribute to marine heatwaves by discharging
+    heated, irradiated wastewater into the ocean. How do power plants cause heatwaves?
+  CorrectAnswer: Discharging Wastewater
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Radiation
+  - Disruption of Habitats
+  - Greenhouse Gases
   MissionPoints: 100
 --- !u!1 &216252688
 GameObject:
@@ -1498,12 +1506,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissionName: Whale
-  MissionDescription: This is Whale
-  CorrectAnswer: Correct
+  MissionDescription: 'Whales are the largest of all sea creatures. Throughout their
+    lives, they absorb 33 tons of CO2 individually and over 40 percent of all CO2
+    produced annually. How do large whales prevent heatwaves?  '
+  CorrectAnswer: Carbon Storage through Biomass
   IncorrectAnswers:
-  - Incorrect 1
-  - Incorrect 2
-  - Incorrect 3
+  - Eating Seagrass
+  - Consuming Ocean Garbage
+  - Migrating through Climates
   MissionPoints: 50
 --- !u!1 &519420028
 GameObject:
@@ -1845,13 +1855,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: 
+  MissionName: Dolphins
+  MissionDescription: Animals that move in groups, like dolpihns, are indicators
+    of healthy ecosystems and are resitant to a wide variety of temperatures. Their
+    decline signals bigger problems, such as a level of surface temperature significantly
+    above average. How to dolphins show the intensity of a heatwave?
+  CorrectAnswer: Fluctuating Population
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Size of Children
+  - Fluctuating Habitat
+  - Trash in Stomach
   MissionPoints: 0
 --- !u!1 &598300771
 GameObject:
@@ -2813,13 +2826,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: 
+  MissionName: Sea Grass
+  MissionDescription: 'Sea Grass, like trees on land, absorb CO2 and cool the ocean.
+    They capture as much CO2 as rainforests do: roughly 30% of all CO2 produced.
+    How does sea grass prevent heatwaves?'
+  CorrectAnswer: Absorbing CO2
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Absorbing water pollution
+  - Food for Whales
+  - Renewable Energy Source
   MissionPoints: 0
 --- !u!1 &1272654485
 GameObject:
@@ -2968,13 +2983,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: 
+  MissionName: Cow
+  MissionDescription: Cows contribute to marine heatwaves indirectly by producing
+    large amounts of methane, a powerful greenhouse gas. How to cows cause heatwaves?
+  CorrectAnswer: Methane Production
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - CO2 Production
+  - Farmed for Meat
+  - Overgrazing
   MissionPoints: 0
 --- !u!1 &1353165280
 GameObject:
@@ -3277,13 +3293,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: Correct Answer
+  MissionName: Factory
+  MissionDescription: Factories contribute to marine heatwaves by releasing greenhouse
+    gases and pollutants into the atmosphere, which trap heat and cause ocean surface
+    temperatures to rise. How do factories cause marine heatwaves?
+  CorrectAnswer: Emitting Greenhouse Gases
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Discharging Wastewater
+  - Chemical Pollution
+  - Acidification
   MissionPoints: 0
 --- !u!1 &1867681549
 GameObject:
@@ -3505,13 +3523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ac331bf5ea894197075b3b1f7e366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionName: 
-  MissionDescription: 
-  CorrectAnswer: 
+  MissionName: Marine Debris
+  MissionDescription: Marine debris, or trash, constitutes of mainly plastics. Plastics,
+    due to being great insulators, capture heat extremely well, and raise surface
+    temperature in large patches. How do marine debris cause heatwaves?
+  CorrectAnswer: Trapping Heat in Plastic
   IncorrectAnswers:
-  - Incorrect Answer 1
-  - Incorrect Answer 2
-  - Incorrect Answer 3
+  - Metal Poisoning
+  - Animals Eating Trash
+  - Trash on the Shore
   MissionPoints: 0
 --- !u!1 &2037078665
 GameObject:
