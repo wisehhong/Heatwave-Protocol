@@ -1859,7 +1859,7 @@ MonoBehaviour:
   MissionDescription: Animals that move in groups, like dolpihns, are indicators
     of healthy ecosystems and are resitant to a wide variety of temperatures. Their
     decline signals bigger problems, such as a level of surface temperature significantly
-    above average. How to dolphins show the intensity of a heatwave?
+    above average. How do dolphins show the intensity of a heatwave?
   CorrectAnswer: Fluctuating Population
   IncorrectAnswers:
   - Size of Children
