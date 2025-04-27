@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro; // Importing TextMeshPro namespace for text handling
 using UnityEngine.UI; // Importing Unity UI namespace for UI handling
+using UnityEngine.SceneManagement;// Importing Unity Scene Management namespace for scene transitions
 
 using System.Collections.Generic; // Importing generic collections for using lists and arrays
 
@@ -153,7 +154,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over! Time's up!");
             GameState = EGameState.Win; // Set the game state to Win. You survived the time limit
             //TODO: Transition to the Win scene
+            SceneManager.LoadSceneAsync(3);
             return;
+
         }
 
         // Check if the temperature increase exceeds the maximum limit
@@ -162,6 +165,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over! Temperature too high!");
             GameState = EGameState.Lose; // Set the game state to Lose. You failed the mission
             //TODO: Transition to the Lose scene
+            SceneManager.LoadSceneAsync(4);
             return;
         }
     }
