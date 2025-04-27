@@ -127,8 +127,16 @@ public class GameManager : MonoBehaviour
         // Update thermometer value based on the current temperature increase
         if (Temperature != null)
         {
-            Temperature.text = CurrentTempIncrease.ToString("F1") + "°F";
+            if (CurrentTempIncrease >= 0.0f)
+            {
+                Temperature.text = "+" + CurrentTempIncrease.ToString("F1") + "°F";
+            }
+            else
+            {
+                Temperature.text = CurrentTempIncrease.ToString("F1") + "°F";
+            }
         }
+
         // Update backgournd color based on the current temperature increase
         if (Background != null)
         {
