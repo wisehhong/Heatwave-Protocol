@@ -14,17 +14,23 @@ public class GameManager : MonoBehaviour
     
     // Reference to UI elements
     public GameObject MissionUI; // Reference to the Mission UI prefab
+    public GameObject TimerUI; // Reference to the Timer UI prefab
+    public TMP_Text Temperature; // Reference to the Temperature TextMeshPro component
 
     // Public game state vaiables
-    public float GameTime = 0.0f; // Game time variable
-    public float GameTimeLimit = 180.0f; // Game time limit variable
+    public float GameTimeLimit = 120.0f; // Game time limit variable
     public float InitialTempIncrease = 0.0f; // Initial increase value for the game state
     public float MinTempIncrease = -4.5f; // Minimum temperature increase value for the game state (F)
     public float MaxTempIncrease = 4.5f; // Maximum temperature increase value for the game state (F)
     public float TempIncreasePerMission = 0.1f; // Temperature increase value for each mission (F)
+    public float MissionUpdateInterval = 10.0f; // Interval for updating the mission state (seconds)
+    public float MissionReenableChance = 0.5f; // Chance to re-enable missions (0.0 - 1.0)
+
 
     // Private game state vaiables
+    private float GameTime = 0.0f; // Game time variable
     private float CurrentTempIncrease = 0.0f; // Temporary increase value for the game state
+    private float NextMissionUpdateTime = 5.0f; // Next mission update time variable
 
     private EGameState GameState; // Current game state
     private enum EGameState
@@ -45,7 +51,6 @@ public class GameManager : MonoBehaviour
         foreach (Transform child in Missions.transform)
         {
             child.gameObject.SetActive(true); // Set each mission GameObject to active
-            CurrentTempIncrease += TempIncreasePerMission; // Increase the temperature value for each mission GameObject
         }
         // Set the Mission UI to inactive at the start
         if (MissionUI != null)
@@ -57,6 +62,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float deltaTime = Time.deltaTime; // Get the time since the last frame
+        GameTime += deltaTime; // Update the game time
+
         // Handle input only for the Play state
         // Other states will not respond to input since UI system will be active
         if (GameState == EGameState.Play)
@@ -75,12 +83,52 @@ public class GameManager : MonoBehaviour
             }        
         }
 
+        if (GameState == EGameState.Win || GameState == EGameState.Lose)
+        {
+            return; // Do not update the game state if the game is over
+        }
+        
+        // Game variables update
+        if (GameTime > NextMissionUpdateTime)
+        {
+            NextMissionUpdateTime += MissionUpdateInterval; // Set the next mission update time
+
+            // Update the temperature increase value every 5 seconds
+            // Count active missions
+            int activeMissionCount = 0; // Initialize active mission count
+            for (int i = 0; i < Missions.GetComponent<Transform>().childCount; i++)
+            {
+                if (Missions.GetComponent<Transform>().GetChild(i).gameObject.activeSelf) // Check if the mission GameObject is active
+                {
+                    activeMissionCount++; // Increment the active mission count
+                }
+                else
+                {
+                    // Check if the mission GameObject is inactive and if it should be re-enabled
+                    if (Random.Range(0.0f, 1.0f) > MissionReenableChance) // Random chance to re-enable the mission
+                    {
+                        Missions.GetComponent<Transform>().GetChild(i).gameObject.SetActive(true); // Re-enable the mission GameObject
+                        Debug.Log("Mission re-enabled: " + Missions.GetComponent<Transform>().GetChild(i).gameObject.name);
+                    }
+                }
+            }
+            CurrentTempIncrease += TempIncreasePerMission * activeMissionCount; // Increase the temperature value for each mission GameObject
+            Debug.Log("CurrentTempIncrease = " + CurrentTempIncrease.ToString("F1") + "°F");            
+        }
+
         // Visual Update
+        // Update the timer value in the UI
+        if (TimerUI != null)
+        {
+            var lastScale = TimerUI.transform.localScale;
+            var scaleChange = new Vector3(0.0f, (GameTime / GameTimeLimit) - lastScale.y, 0.0f);
+            TimerUI.transform.localScale += scaleChange;
+        }
         // Update thermometer value based on the current temperature increase
-        // if (Background != null)
-        // {
-        //     Background.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = "Temperature: " + CurrentTempIncrease.ToString("F1") + "°F"; // Update the thermometer value in the UI
-        // }
+        if (Temperature != null)
+        {
+            Temperature.text = CurrentTempIncrease.ToString("F1") + "°F";
+        }
         // Update backgournd color based on the current temperature increase
         if (Background != null)
         {
@@ -88,6 +136,25 @@ public class GameManager : MonoBehaviour
             float colorValue = Mathf.Clamp(CurrentTempIncrease / MaxTempIncrease, 0.0f, 1.0f);
              // Update the background color based on the temperature increase
             Background.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f - colorValue, 1.0f - colorValue);
+        }
+
+        // Game state update
+        // Check if the game time exceeds the time limit
+        if (GameTime >= GameTimeLimit)
+        {
+            Debug.Log("Game Over! Time's up!");
+            GameState = EGameState.Win; // Set the game state to Win. You survived the time limit
+            //TODO: Transition to the Win scene
+            return;
+        }
+
+        // Check if the temperature increase exceeds the maximum limit
+        if (CurrentTempIncrease >= MaxTempIncrease)
+        {
+            Debug.Log("Game Over! Temperature too high!");
+            GameState = EGameState.Lose; // Set the game state to Lose. You failed the mission
+            //TODO: Transition to the Lose scene
+            return;
         }
     }
 
