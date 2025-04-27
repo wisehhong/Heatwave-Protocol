@@ -309,8 +309,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -477,8 +477,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -225}
-  m_SizeDelta: {x: 200, y: 75}
+  m_AnchoredPosition: {x: 0, y: -380}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113510532
 MonoBehaviour:
@@ -780,8 +780,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 121}
-  m_SizeDelta: {x: 950, y: 50}
+  m_AnchoredPosition: {x: 0, y: 150}
+  m_SizeDelta: {x: 1700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692635266
 MonoBehaviour:
@@ -803,10 +803,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'SDG 14, Life Below Water, seeks to protect and sustainably manage the
+  m_text: "SDG 14, Life Below Water, seeks to protect and sustainably manage the
     oceans, seas, and marine resources to support sustainable development. It focuses
     on preserving marine biodiversity, addressing ocean acidification, reducing pollution,
-    and encouraging responsible fishing practices. '
+    and encouraging responsible fishing practices. \nMARINE HEATWAVES are a deadly
+    natural phenomenon that threatens marine life due to an abnormal increase of
+    surface temperature. MARINE HEATWAVES are rising as a result of rapid global
+    warming."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b45596184428984791ed433fe6f9c5f, type: 2}
   m_sharedMaterial: {fileID: 5240556894516065092, guid: 3b45596184428984791ed433fe6f9c5f, type: 2}
@@ -833,8 +836,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
-  m_fontSizeBase: 38
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -919,8 +922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: 0, y: 330}
+  m_SizeDelta: {x: 1400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1738586362
 MonoBehaviour:
@@ -969,8 +972,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 108
+  m_fontSizeBase: 108
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
