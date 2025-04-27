@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      thermometer_glass_0: 4650308067984229847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

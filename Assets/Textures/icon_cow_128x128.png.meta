@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      icon_cow_128x128_0: 2461166468592898763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

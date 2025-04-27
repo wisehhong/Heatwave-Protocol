@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      icon_cach_128x128_0: 8879824613777764457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

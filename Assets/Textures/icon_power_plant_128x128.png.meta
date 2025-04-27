@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      icon_power_plant_128x128_0: -546600858025966384
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

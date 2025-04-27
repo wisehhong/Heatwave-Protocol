@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      icon_whale_128x128_0: -6547184067004544349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
