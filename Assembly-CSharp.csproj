@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\NextScene.cs" />
+    <Compile Include="Assets\Scripts\Mission.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MissionUI.cs" />
     <Compile Include="Assets\Scripts\PlayGame.cs" />
   </ItemGroup>
   <ItemGroup>
