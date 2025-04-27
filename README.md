@@ -1,6 +1,5 @@
 # Heatwave Protocol
  Save the Sea
-# About the Project
 
 ## Inspiration
 We were inspired by **SDG 14: Life Below Water**, which emphasizes protecting oceans as they face rapid warming due to human activities like pollution, overfishing, and greenhouse gas emissions. Seeing how marine heatwaves are destroying ecosystems critical to Earth's health motivated us to create an engaging, interactive way to educate people about this urgent issue.
