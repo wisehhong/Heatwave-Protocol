@@ -21,9 +21,10 @@ public class GameManager : MonoBehaviour
     public float InitialTempIncrease = 0.0f; // Initial increase value for the game state
     public float MinTempIncrease = -4.5f; // Minimum temperature increase value for the game state (F)
     public float MaxTempIncrease = 4.5f; // Maximum temperature increase value for the game state (F)
+    public float TempIncreasePerMission = 0.1f; // Temperature increase value for each mission (F)
 
     // Private game state vaiables
-    private float CurrentTempIncrease = 0.1f; // Temporary increase value for the game state
+    private float CurrentTempIncrease = 0.0f; // Temporary increase value for the game state
 
     private EGameState GameState; // Current game state
     private enum EGameState
@@ -32,6 +33,25 @@ public class GameManager : MonoBehaviour
         Mission,
         Win,
         Lose,
+    }
+
+    void Start()
+    {
+        // Initialize the game state to Play
+        GameState = EGameState.Play;
+        // Set the initial temperature increase value
+        CurrentTempIncrease = InitialTempIncrease;
+        // Set mission GameObjects to active at the start
+        foreach (Transform child in Missions.transform)
+        {
+            child.gameObject.SetActive(true); // Set each mission GameObject to active
+            CurrentTempIncrease += TempIncreasePerMission; // Increase the temperature value for each mission GameObject
+        }
+        // Set the Mission UI to inactive at the start
+        if (MissionUI != null)
+        {
+            MissionUI.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -50,15 +70,31 @@ public class GameManager : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    StartMission(hit.collider.GetComponent<Mission>());
+                    StartMission(hit.collider.gameObject); // Start the mission if a collider is hit
                 }
             }        
+        }
+
+        // Visual Update
+        // Update thermometer value based on the current temperature increase
+        // if (Background != null)
+        // {
+        //     Background.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = "Temperature: " + CurrentTempIncrease.ToString("F1") + "°F"; // Update the thermometer value in the UI
+        // }
+        // Update backgournd color based on the current temperature increase
+        if (Background != null)
+        {
+            // Clamp the color value between 0 and 1
+            float colorValue = Mathf.Clamp(CurrentTempIncrease / MaxTempIncrease, 0.0f, 1.0f);
+             // Update the background color based on the temperature increase
+            Background.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f - colorValue, 1.0f - colorValue);
         }
     }
 
     // Method to handle mission start
-    void StartMission(Mission mission)
+    void StartMission(GameObject gameObject)
     {
+        Mission mission = gameObject.GetComponent<Mission>(); // Get the Mission component from the GameObject
          // Check if mission is null
         if (mission == null)
         {
@@ -81,7 +117,7 @@ public class GameManager : MonoBehaviour
         var button = MissionUI.GetComponent<Transform>().GetChild(buttonIndex + correctAnswerIndex);
         button.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = mission.CorrectAnswer;
         button.GetComponent<Button>().onClick.RemoveAllListeners(); // Remove all listeners to avoid duplicate bindings
-        button.GetComponent<Button>().onClick.AddListener(MissionCorrectAnswer); // Bind the correct answer method
+        button.GetComponent<Button>().onClick.AddListener(delegate{MissionCorrectAnswer(gameObject);}); // Bind the correct answer method
         // Set the incorrect answers in the UI 
         for (int i = 0; i < mission.IncorrectAnswers.Count + 1; i++)
         {
@@ -99,7 +135,7 @@ public class GameManager : MonoBehaviour
             button = MissionUI.GetComponent<Transform>().GetChild(i + buttonIndex);
             button.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = mission.IncorrectAnswers[incorrectAnswerIndex];
             button.GetComponent<Button>().onClick.RemoveAllListeners(); // Remove all listeners to avoid duplicate bindings
-            button.GetComponent<Button>().onClick.AddListener(MissionIncorrectAnswer); // Bind the incorrect answer method
+            button.GetComponent<Button>().onClick.AddListener(delegate{MissionIncorrectAnswer(gameObject);}); // Bind the incorrect answer method
         }
         // Enable the Mission UI
         MissionUI.SetActive(true);
@@ -107,22 +143,45 @@ public class GameManager : MonoBehaviour
         GameState = EGameState.Mission;
     }
 
-    void MissionCorrectAnswer()
+    void MissionCorrectAnswer(GameObject gameObject)
     {
         // This method is called when the correct answer is selected
         Debug.Log("Correct answer selected!");
-        // Enable the Mission UI
+        Mission mission = gameObject.GetComponent<Mission>(); // Get the Mission component from the GameObject
+        if (mission == null)
+        {
+            Debug.LogError("Mission is null");
+            return;
+        }
+
+        // Hide the Mission GameObject
+        gameObject.SetActive(false);
+        // Hide the Mission UI
         MissionUI.SetActive(false);
-        GameState = EGameState.Play; // Set the game state back to Play
+        // Set the game state back to Play
+        GameState = EGameState.Play;
+        // Decrease the temperature value for each correct answer
+        CurrentTempIncrease -= TempIncreasePerMission; 
+        Debug.Log("CurrentTempIncrease = " + CurrentTempIncrease.ToString("F1") + "°F");
     }
 
-    void MissionIncorrectAnswer()
+    void MissionIncorrectAnswer(GameObject gameObject)
     {
         // This method is called when the incorrect answer is selected
-        // You can add code here to handle what happens when the incorrect answer is selected
         Debug.Log("Incorrect answer selected!");
+        Mission mission = gameObject.GetComponent<Mission>(); // Get the Mission component from the GameObject
+        if (mission == null)
+        {
+            Debug.LogError("Mission is null");
+            return;
+        }
+        // Hide the Mission UI
         MissionUI.SetActive(false);
-        GameState = EGameState.Play; // Set the game state back to Play
+        // Set the game state back to Play
+        GameState = EGameState.Play;
+        // Increase the temperature value for each incorrect answer
+        CurrentTempIncrease += TempIncreasePerMission; 
+        Debug.Log("CurrentTempIncrease = " + CurrentTempIncrease.ToString("F1") + "°F");
     }   
 
 }
