@@ -3,6 +3,7 @@ using TMPro; // Importing TextMeshPro namespace for text handling
 using UnityEngine.UI; // Importing Unity UI namespace for UI handling
 using UnityEngine.SceneManagement;// Importing Unity Scene Management namespace for scene transitions
 
+using System.Collections;// Importing collections for using coroutines
 using System.Collections.Generic; // Importing generic collections for using lists and arrays
 
 // Main game manager script that handles the game state and input
@@ -27,8 +28,15 @@ public class GameManager : MonoBehaviour
     public float MissionUpdateInterval = 10.0f; // Interval for updating the mission state (seconds)
     public float MissionReenableChance = 0.5f; // Chance to re-enable missions (0.0 - 1.0)
 
+    //Audio
+    [SerializeField] private AudioClip correctAnswer; // Reference to the correct answer sound
+    [SerializeField] private AudioClip incorrectAnswer; // Reference to the incorrect answer sound
 
+    
     // Private game state vaiables
+    private AudioSource audioSource; //Reference to AudioSource component
+    private AudioSource backgroundAudio; //Reference to the background audio source
+
     private float GameTime = 0.0f; // Game time variable
     private float CurrentTempIncrease = 0.0f; // Temporary increase value for the game state
     private float NextMissionUpdateTime = 5.0f; // Next mission update time variable
@@ -49,6 +57,10 @@ public class GameManager : MonoBehaviour
         // Set the initial temperature increase value
         CurrentTempIncrease = InitialTempIncrease;
         // Set mission GameObjects to active at the start
+        //Sets up audio
+        audioSource = GetComponent<AudioSource>();
+
+
         foreach (Transform child in Missions.transform)
         {
             child.gameObject.SetActive(true); // Set each mission GameObject to active
@@ -226,6 +238,8 @@ public class GameManager : MonoBehaviour
     {
         // This method is called when the correct answer is selected
         Debug.Log("Correct answer selected!");
+        audioSource.clip = correctAnswer;
+        audioSource.Play();
         Mission mission = gameObject.GetComponent<Mission>(); // Get the Mission component from the GameObject
         if (mission == null)
         {
@@ -248,6 +262,8 @@ public class GameManager : MonoBehaviour
     {
         // This method is called when the incorrect answer is selected
         Debug.Log("Incorrect answer selected!");
+        audioSource.clip = incorrectAnswer;
+        audioSource.Play();
         Mission mission = gameObject.GetComponent<Mission>(); // Get the Mission component from the GameObject
         if (mission == null)
         {
