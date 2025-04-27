@@ -3,5 +3,5 @@ Logs/
 UserSettings/
 Temp/
 .vscode/
-Heatwave-Protocol.sln/
-Assembly-CSharp.csproj/
+*.sln
+*.csproj

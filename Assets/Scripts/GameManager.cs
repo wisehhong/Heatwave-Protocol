@@ -15,27 +15,45 @@ public class GameManager : MonoBehaviour
     // Reference to UI elements
     public GameObject MissionUI; // Reference to the Mission UI prefab
 
-    // Game state variables
-    private float TempIncrease = 0.1f; // Temporary increase value for the game state
-    private float CurrentTemp = 40.0f; // Current temperature value for the game state
+    // Public game state vaiables
+    public float GameTime = 0.0f; // Game time variable
+    public float GameTimeLimit = 180.0f; // Game time limit variable
+    public float InitialTempIncrease = 0.0f; // Initial increase value for the game state
+    public float MinTempIncrease = -4.5f; // Minimum temperature increase value for the game state (F)
+    public float MaxTempIncrease = 4.5f; // Maximum temperature increase value for the game state (F)
+
+    // Private game state vaiables
+    private float CurrentTempIncrease = 0.1f; // Temporary increase value for the game state
+
+    private EGameState GameState; // Current game state
+    private enum EGameState
+    {
+        Play,
+        Mission,
+        Win,
+        Lose,
+    }
 
     // Update is called once per frame
     void Update()
     {
-        // Input handling
-
-        // Left mouse click
-        if (Input.GetMouseButtonDown(0))
+        // Handle input only for the Play state
+        // Other states will not respond to input since UI system will be active
+        if (GameState == EGameState.Play)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-            if (hit.collider != null)
+            // Left mouse click
+            if (Input.GetMouseButtonDown(0))
             {
-                StartMission(hit.collider.GetComponent<Mission>());
-            }
-        }        
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+                if (hit.collider != null)
+                {
+                    StartMission(hit.collider.GetComponent<Mission>());
+                }
+            }        
+        }
     }
 
     // Method to handle mission start
@@ -60,9 +78,10 @@ public class GameManager : MonoBehaviour
         int buttonIndex = 2; // Start from the first button index
         // Set the correct answer in the UI
         Debug.Log("Binding correct answer: " + correctAnswerIndex);
-        MissionUI.GetComponent<Transform>().GetChild(buttonIndex + correctAnswerIndex)
-            .GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text
-            = mission.CorrectAnswer;
+        var button = MissionUI.GetComponent<Transform>().GetChild(buttonIndex + correctAnswerIndex);
+        button.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = mission.CorrectAnswer;
+        button.GetComponent<Button>().onClick.RemoveAllListeners(); // Remove all listeners to avoid duplicate bindings
+        button.GetComponent<Button>().onClick.AddListener(MissionCorrectAnswer); // Bind the correct answer method
         // Set the incorrect answers in the UI 
         for (int i = 0; i < mission.IncorrectAnswers.Count + 1; i++)
         {
@@ -77,20 +96,33 @@ public class GameManager : MonoBehaviour
             }
             // Set the incorrect answer in the UI
             Debug.Log("Binding incorrect answer: " + i);
-            MissionUI.GetComponent<Transform>().GetChild(i + buttonIndex)
-                .GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text
-                = mission.IncorrectAnswers[incorrectAnswerIndex];
+            button = MissionUI.GetComponent<Transform>().GetChild(i + buttonIndex);
+            button.GetComponent<Transform>().GetChild(0).GetComponent<TMP_Text>().text = mission.IncorrectAnswers[incorrectAnswerIndex];
+            button.GetComponent<Button>().onClick.RemoveAllListeners(); // Remove all listeners to avoid duplicate bindings
+            button.GetComponent<Button>().onClick.AddListener(MissionIncorrectAnswer); // Bind the incorrect answer method
         }
         // Enable the Mission UI
         MissionUI.SetActive(true);
+        // Set the game state to Mission
+        GameState = EGameState.Mission;
     }
 
-    // Method to handle mission completion 
-    void CompleteMission(Mission mission)
+    void MissionCorrectAnswer()
     {
-        // This method is called when a mission is completed
-        // You can add code here to handle what happens when the mission is completed
-        Debug.Log("Mission completed: " + mission.MissionName);
-        Debug.Log("You earned " + mission.MissionPoints + " points!"); 
+        // This method is called when the correct answer is selected
+        Debug.Log("Correct answer selected!");
+        // Enable the Mission UI
+        MissionUI.SetActive(false);
+        GameState = EGameState.Play; // Set the game state back to Play
     }
+
+    void MissionIncorrectAnswer()
+    {
+        // This method is called when the incorrect answer is selected
+        // You can add code here to handle what happens when the incorrect answer is selected
+        Debug.Log("Incorrect answer selected!");
+        MissionUI.SetActive(false);
+        GameState = EGameState.Play; // Set the game state back to Play
+    }   
+
 }
